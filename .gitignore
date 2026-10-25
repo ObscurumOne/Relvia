@@ -1,0 +1,6 @@
+/build/
+/.idea/
+/.vscode/
+.env
+CMakeUserPresets.json
+/cmake-build-*/
