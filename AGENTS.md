@@ -13,10 +13,22 @@ Build an independent open-source C++ database library. Read README.md and docs/a
 - Do not store credentials or log connection strings. Do not copy EntityCraft code.
 - Explain technical decisions in Russian; code identifiers and public documentation may use English.
 
-Validation:
+Validation on Linux/macOS:
 ```sh
 cmake -S . -B build -DBUILD_TESTING=ON
 cmake --build build --config Debug
 ctest --test-dir build -C Debug --output-on-failure
 ```
+
+Validation on Windows (PowerShell, from the repository root):
+```powershell
+# Only if the session execution policy requires it; do not bypass enforced policy.
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned -Force
+.\scripts\build-windows.ps1 -Clean
+```
+The script initializes x64 MSVC in the current process and uses Ninja Debug in
+`build/windows-msvc`, independently of CLion's `cmake-build-*` caches. Requires
+Visual Studio or Build Tools with C++ x64/x86 tools, vswhere, CMake 3.20+ and Ninja.
+It accepts prerelease installations; use `-VisualStudioPath '<installation directory>'`
+to select one explicitly. No tools are installed automatically.
 Report checks actually performed and missing tooling. For driver changes, add meaningful backend integration tests. Cross-platform CI results must not be inferred from Linux checks.
